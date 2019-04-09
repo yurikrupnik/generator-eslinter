@@ -1,0 +1,2 @@
+# generator-eslinter
+optional
