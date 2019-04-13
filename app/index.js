@@ -44,8 +44,6 @@ module.exports = class EslintGenerator extends Generator {
                     }, new Set());
 
                     this.packages = new Set([...this.packages, ...extraPackages]);
-                    console.log('this.packages', this.packages);
-
                 });
         }
     }
