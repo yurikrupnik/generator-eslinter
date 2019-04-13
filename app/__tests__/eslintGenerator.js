@@ -19,6 +19,7 @@ describe('Eslint generator', () => {
                 assert.noFileContent('.eslintrc', 'jest');
             });
     });
+
     test('use generator with configs and plugins options', () => {
         return helpers.run(path.join(__dirname, '../index.js'))
             .withOptions({
