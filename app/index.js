@@ -55,9 +55,7 @@ module.exports = class EslintGenerator extends Generator {
             .reduce(
                 (acc, next) => acc.concat(exec(`npm info eslint-${type}-${next} ${peer ? 'peerDependencies' : ''} --json`)
                     .then(({stdout}) => {
-                        if (stdout) {
-                            Array.isArray(storage) && storage.push(next);
-                        }
+                        stdout && storage.push(next);
                         if (type === 'config' && stdout) {
                             this.packages.add(`eslint-${type}-${next}`);
                         }
