@@ -30,29 +30,38 @@ module.exports = class EslintGenerator extends Generator {
     async configuring() {
         const { configs, plugins } = this.options;
         if (configs.length) {
-            await Promise.all(this._createConfigPromises('config', configs, this.extendsArray, true))
+            await Promise.all(this._createPromises('config', configs, this.extendsArray, true))
                 .then(this._handlePeerDependenciesPackages.bind(this));
         }
         if (plugins.length) {
-            await Promise.all(this._createConfigPromises('plugin', plugins, this.plugins))
+            await Promise.all(this._createPromises('plugin', plugins, this.plugins))
                 .then(res => {
                     const extraPackages = res.reduce((acc, next) => {
-                        acc.add(next.name);
+                        if (next.name) {
+                            acc.add(next.name);
+                        }
                         return acc;
                     }, new Set());
 
                     this.packages = new Set([...this.packages, ...extraPackages]);
+                    console.log('this.packages', this.packages);
+
                 });
         }
     }
 
-    _createConfigPromises(type, data, storage, peer = false) {
+    _createPromises(type, data, storage, peer = false) {
         return data.split(',')
             .reduce(
                 (acc, next) => acc.concat(exec(`npm info eslint-${type}-${next} ${peer ? 'peerDependencies' : ''} --json`)
                     .then(({stdout}) => {
-                        Array.isArray(storage) && storage.push(next);
-                        return JSON.parse(stdout)
+                        if (stdout) {
+                            Array.isArray(storage) && storage.push(next);
+                        }
+                        if (type === 'config' && stdout) {
+                            this.packages.add(`eslint-${type}-${next}`);
+                        }
+                        return JSON.parse(stdout);
                     })
                     .catch((err) => {
                         this.log(chalk.red(`command ${next} ${err.cmd} failed`));
@@ -61,12 +70,18 @@ module.exports = class EslintGenerator extends Generator {
     }
 
     writing() {
+        this.fs.extendJSON(this.destinationPath('package.json'), {
+            scripts: {
+                lint: 'eslint .'
+            }
+        });
+
         const { extendsArray, plugins } = this;
         const { personal } = this.options;
         this.fs.copyTpl(
             this.templatePath('.*'),
             this.destinationPath(),
-            {extendsArray, personal, plugins }
+            { extendsArray, personal, plugins }
         );
     }
 
