@@ -8,7 +8,7 @@ const {
 } = global;
 
 describe('Eslint generator', () => {
-    test('use generator eslint default', () => {
+    test('use generator with default options', () => {
         return helpers.run(path.join(__dirname, '../index.js'))
             .then(function () {
                 assert.file('.eslintrc');
@@ -19,7 +19,20 @@ describe('Eslint generator', () => {
                 assert.noFileContent('.eslintrc', 'jest');
             });
     });
-    test('use generator eslint with react', () => {
+    test('use generator with configs and plugins options', () => {
+        return helpers.run(path.join(__dirname, '../index.js'))
+            .withOptions({
+                configs: 'airbnb',
+                plugins: 'jest'
+            })
+            .then(function () {
+                assert.file('.eslintrc');
+                assert.fileContent('.eslintrc', 'airbnb');
+                assert.fileContent('.eslintrc', 'jest');
+            });
+    });
+
+    test('use generator configs and plugins options handle errors', () => {
         return helpers.run(path.join(__dirname, '../index.js'))
             .withOptions({
                 configs: 'airbnb,none',
@@ -28,6 +41,7 @@ describe('Eslint generator', () => {
             .then(function () {
                 assert.file('.eslintrc');
                 assert.fileContent('.eslintrc', 'airbnb');
+                assert.noFileContent('.eslintrc', 'none');
                 assert.fileContent('.eslintrc', 'jest');
             });
     });
