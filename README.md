@@ -1,5 +1,12 @@
-[![Build Status](https://travis-ci.org/yurikrupnik/generator-eslinter.svg?branch=master)](https://travis-ci.org/yurikrupnik/generator-eslinter)
-[![Coverage Status](https://coveralls.io/repos/github/yurikrupnik/generator-eslinter/badge.svg?branch=master)](https://coveralls.io/github/yurikrupnik/generator-eslinter?branch=master)
+![Build Status](https://img.shields.io/github/repo-size/yurikrupnik/generator-eslinter.svg)
+![Build Status](https://img.shields.io/github/languages/code-size/yurikrupnik/generator-eslinter.svg)
+![Build Status](https://img.shields.io/bundlephobia/min/generator-eslinter.svg)`
+![CircleCI](https://circleci.com/gh/yurikrupnik/generator-eslinter.svg?style=svg)
+![codecov](https://codecov.io/gh/yurikrupnik/generator-eslinter/branch/master/graph/badge.svg)
+![BCH compliance](https://bettercodehub.com/edge/badge/yurikrupnik/generator-eslinter?branch=master)
+![dependencies Status](https://david-dm.org/yurikrupnik/generator-eslinter/status.svg)
+![devDependencies Status](https://david-dm.org/yurikrupnik/generator-eslinter/dev-status.svg)
+![peerDependencies Status](https://david-dm.org/yurikrupnik/generator-eslinter/peer-status.svg)
 # generator-eslinter
 
 Generator-eslinter creates .eslintrc file with support for plugins and configs.

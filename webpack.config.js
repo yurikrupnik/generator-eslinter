@@ -1,5 +1,6 @@
 const path = require('path');
 const nodeExternals = require('webpack-node-externals');
+const CopyPlugin = require('copy-webpack-plugin');
 
 module.exports = {
     context: path.resolve(__dirname, 'app'),
@@ -23,5 +24,10 @@ module.exports = {
                 use: ['babel-loader', 'eslint-loader'],
             }
         ]
-    }
+    },
+    plugins: [
+        new CopyPlugin([
+            { from: 'templates', to: 'templates' }
+        ]),
+    ]
 };

@@ -1,8 +1,9 @@
 {
   "name": "generator-eslinter",
-  "version": "1.1.0",
-  "description": "Yeoman generator for .eslintrc file with react support",
+  "version": "1.1.1",
+  "description": "Yeoman generator for .eslintrc file",
   "main": "app/index.js",
+  "module": "app/index.js",
   "scripts": {
     "lint:templates": "ejslint app/templates**",
     "lint:generator": "eslint app/index.js",
@@ -10,8 +11,8 @@
     "test": "jest app",
     "test:watch": "jest app --watch",
     "test:coverage": "jest app --coverage",
-    "build": "webpack",
-    "clean": "rimraf dist/"
+    "prebuild": "rimraf dist",
+    "build": "webpack"
   },
   "repository": {
     "type": "git",
@@ -28,13 +29,14 @@
   "homepage": "https://github.com/yurikrupnik/generator-eslinter#readme",
   "dependencies": {
     "chalk": "^2.4.2",
-    "yeoman-generator": "^3.2.0"
+    "yeoman-generator": "^4.0.0"
   },
   "devDependencies": {
     "@babel/plugin-syntax-object-rest-spread": "^7.2.0",
     "@babel/preset-env": "^7.4.3",
     "babel-eslint": "^10.0.1",
     "babel-loader": "^8.0.5",
+    "copy-webpack-plugin": "^5.0.3",
     "coveralls": "^3.0.3",
     "eslint": "^5.16.0",
     "eslint-loader": "^2.1.2",
@@ -47,7 +49,7 @@
     "yeoman-test": "^1.9.1"
   },
   "files": [
-    "app"
+    "dist"
   ],
   "keywords": [
     "yeoman-generator",
