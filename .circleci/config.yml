@@ -57,7 +57,7 @@ jobs:
       - run:
           name: test
           command: npm run test -- --coverage
-     - run:
+      - run:
           name: test e2e
           command: npm run test:e2e
       - codecov/upload
