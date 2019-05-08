@@ -9,6 +9,7 @@
     "lint:generator": "eslint app/index.js",
     "lint": "npm run lint:templates && npm run lint:generator",
     "test": "jest app",
+    "test:e2e": "jest e2e",
     "test:watch": "jest app --watch",
     "test:coverage": "jest app --coverage",
     "prebuild": "rimraf dist",

@@ -57,6 +57,9 @@ jobs:
       - run:
           name: test
           command: npm run test -- --coverage
+     - run:
+          name: test e2e
+          command: npm run test:e2e
       - codecov/upload
       - store_artifacts:
           path: coverage
