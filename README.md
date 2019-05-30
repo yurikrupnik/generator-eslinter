@@ -9,6 +9,8 @@
 ![peerDependencies Status](https://david-dm.org/yurikrupnik/generator-eslinter/peer-status.svg)
 # generator-eslinter
 
+[![Greenkeeper badge](https://badges.greenkeeper.io/yurikrupnik/generator-eslinter.svg)](https://greenkeeper.io/)
+
 Generator-eslinter creates .eslintrc file with support for plugins and configs.
 
 ## Install
